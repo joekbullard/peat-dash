@@ -2,10 +2,9 @@ FROM python:3.9.2-slim-buster
 
 WORKDIR /usr/src/app
 
-LABEL description="Development image for peatdash"
+LABEL description="Development image for peatdash tutorial"
 
 ENV PYTHONDONTWRITEBYTECODE 1
-
 ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update \
@@ -27,4 +26,4 @@ RUN chmod +x /usr/src/app/entrypoint.sh
 COPY . .
 
 # run entrypoint.sh
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+ENTRYPOINT ["sh", "/usr/src/app/entrypoint.sh"]

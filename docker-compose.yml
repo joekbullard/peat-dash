@@ -1,26 +1,51 @@
 version: '3.8'
 
 services:
-  db:
-    image: postgis/postgis:13-3.1-alpine
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=hello_django
-      - POSTGRES_PASSWORD=hello_django
-      - POSTGRES_DB=hello_django_dev
   web:
     build: ./app
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./app/:/usr/src/app/
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/mediafiles
     ports:
       - 8000:8000
     env_file:
-      - ./.env
+      - ./.env.dev
     depends_on:
       - db
-  
+  db:
+    image: kartoza/postgis:13.0
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data/
+      - dbbackups:/backups
+    environment:
+      - POSTGRES_USER=hello_django
+      - POSTGRES_PASSWORD=hello_django
+      - POSTGRES_DB=hello_django_dev
+    restart: on-failure
+    healthcheck:
+      test: "exit 0"
+
+  dbbackups:
+    image: kartoza/pg-backup:13.0
+    hostname: pg-backups
+    volumes:
+      - dbbackups:/backups
+    environment:
+      - DUMPPREFIX=PG_db
+      - POSTGRES_USER=hello_django
+      - POSTGRES_PASS=hello_django
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOST=db
+      - POSTGRES_DBNAME=hello_django_dev
+    restart: on-failure
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
   postgres_data:
+  dbbackups:
+  static_volume:
+  media_volume:

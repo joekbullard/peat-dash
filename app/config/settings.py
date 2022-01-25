@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
 
     # third party
+    'leaflet',
 
     # my apps
     'peatdash',
@@ -139,4 +140,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER': (56.98460740640165, -4.016565493793858),
+    'DEFAULT_ZOOM': 6,
+    'MIN_ZOOM': 3,
+    'MAX_ZOOM': 18,
+    'DEFAULT_PRECISION': 6,
+}
 

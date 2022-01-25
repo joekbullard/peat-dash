@@ -1,3 +1,8 @@
-from django.contrib import admin
+from django.contrib.gis import admin
+from leaflet.admin import LeafletGeoAdmin
+from .models import *
 
-# Register your models here.
+admin.site.register(GrantReference)
+admin.site.register(SiteOutline, LeafletGeoAdmin)
+admin.site.register(RestorationLines, LeafletGeoAdmin)
+admin.site.register(RestorationPoints, LeafletGeoAdmin)
