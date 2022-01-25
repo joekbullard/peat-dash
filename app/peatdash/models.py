@@ -27,6 +27,7 @@ class RestorationLines(models.Model):
     CHOICES = (
         (1, 'Peat dam'),
         (2, 'Hag reprofiling'),
+        (3, 'Gully reprofiling'),
     )
     site_id = models.ForeignKey(SiteOutline, on_delete=models.CASCADE)
     technique = models.IntegerField(choices=CHOICES)

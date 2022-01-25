@@ -42,6 +42,8 @@ INSTALLED_APPS = [
 
     # third party
     'leaflet',
+    'rest_framework',
+    'rest_framework_gis',
 
     # my apps
     'peatdash',
