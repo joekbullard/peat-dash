@@ -1,0 +1,20 @@
+{% load static %}
+{% load rest_framework %}
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>    
+<body>
+
+<div style="padding-left: 20em; padding-right: 20em;">
+    <h1>Grant - {{ site.name }}</h1>
+    <form action="{% url 'site_detail' pk=site.pk %}" method="POST">
+        {% csrf_token %}
+        {% render_form serializer %}
+        <input type="submit" value="Save">
+    </form>
+</div>
+
+</body>
+</html>

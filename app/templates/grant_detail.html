@@ -1,0 +1,25 @@
+{% load static %}
+{% load rest_framework %}
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>    
+<body>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">PeatDash</a>
+</nav>
+
+<div style="padding-left: 20em; padding-right: 20em;">
+    <h1>Grant - {{ grant.reference }}</h1>
+    <form action="{% url 'grant_detail' pk=grant.pk %}" method="POST">
+        {% csrf_token %}
+        {% render_form serializer %}
+        <input type="submit" value="Save">
+    </form>
+</div>
+
+</body>
+</html>
+
+    

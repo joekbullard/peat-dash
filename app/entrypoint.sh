@@ -12,6 +12,8 @@ then
 fi
 
 python manage.py flush --no-input
-python manage.py migrate
+python manage.py makemigrations
+python manage.py migrate peatdash
+python manage.py createsuperuser --no-input
 
 exec "$@"

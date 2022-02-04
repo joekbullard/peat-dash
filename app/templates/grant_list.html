@@ -1,0 +1,9 @@
+<html><body>
+    <h1>Profiles</h1>
+    <ul>
+        {% for grant in grants %}
+        <li>{{ grant.name }}</li>
+        <li>{{ grant.site_area }}</li>
+        {% endfor %}
+    </ul>
+    </body></html>
